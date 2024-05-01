@@ -211,7 +211,7 @@ def train_model(model, dataloaders, dataset_sizes, criterion, optimizer, schedul
                 running_loss += loss.item() * inputs.size(0)#batch size
                 running_corrects += torch.sum(preds == labels.data)
                 # measure accuracy and record loss
-                acc1, acc5 = accuracy(outputs, labels, topk=(1, 5))
+                acc1, acc5 = accuracy(outputs, labels, topk=(1, 2))
                 losses.update(loss.item(), inputs.size(0))
                 top1.update(acc1[0], inputs.size(0))
                 top5.update(acc5[0], inputs.size(0))
@@ -372,18 +372,19 @@ def main():
     tensorboard_writer = SummaryWriter(args.save_path)
 
     if args.GPU:
-        num_gpu = torch.cuda.device_count()
-        print("Num GPUs:", num_gpu)
+        pass
+        # num_gpu = torch.cuda.device_count()
+        # print("Num GPUs:", num_gpu)
         # Which GPU Is The Current GPU?
-        print(torch.cuda.current_device())
+        # print(torch.cuda.current_device())
 
-        # Get the name of the current GPU
-        print(torch.cuda.get_device_name(torch.cuda.current_device()))
+        # # Get the name of the current GPU
+        # # print(torch.cuda.get_device_name(torch.cuda.current_device()))
 
-        # Is PyTorch using a GPU?
-        print(torch.cuda.is_available())
-        global device
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        # # Is PyTorch using a GPU?
+        # print(torch.cuda.is_available())
+        # global device
+        # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     else:
         print("No GPU and TPU enabled")

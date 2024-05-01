@@ -87,6 +87,10 @@ def createTorchCNNmodel(name, numclasses, img_shape, pretrained=True):
         return create_resnetmodel1(numclasses, img_shape)
     elif name=='customresnet':
         return setupCustomResNet(numclasses, 'resnet50')
+    elif name=='rajatNet1':
+        return create_rajatNet1(numclasses, img_shape)
+    elif name=='rajatNet2':
+        return create_rajatNet2(numclasses, img_shape)
     elif name in model_names:
         #return models.__dict__[name](pretrained=pretrained)
         #return create_torchvisionmodel(name, numclasses, pretrained)
