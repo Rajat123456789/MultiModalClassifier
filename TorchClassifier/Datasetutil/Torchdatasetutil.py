@@ -291,6 +291,8 @@ def loadtorchvisiondataset(name, path):
     datapath = os.path.join(path, name) #data path name is constructed by the input data path and the dataset name
     if not os.path.exists(datapath):
         os.makedirs(datapath)
+    print(f'Dataset path: {datapath}')  
+    print("dfshjbdfshbjdfhjs")
     # choose the training and test datasets
     if name == 'CIFAR10':
         train_data = datasets.CIFAR10(datapath, train=True,
@@ -379,3 +381,8 @@ def loadtorchvisiondataset(name, path):
         valid_idx), 'test': len(test_data)}
 
     return dataloaders, dataset_sizes, class_names, imageshape
+
+
+
+
+
