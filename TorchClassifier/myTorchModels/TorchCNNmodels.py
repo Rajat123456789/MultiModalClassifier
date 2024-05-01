@@ -530,3 +530,65 @@ def create_torchvisionmodel(modulename, numclasses, freezeparameters=True, pretr
         return pretrained_model
     else:
         print('Model name not exist.')
+
+class rajatNet1(nn.Module):
+    def __init__(self):
+        super(rajatNet1 , self).__init__()
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
+        self.relu = nn.ReLU()
+        self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(16 * 112 * 112, 64)
+        self.fc2 = nn.Linear(64, 2)
+
+    def forward(self, x):
+        out = self.conv1(x)
+        out = self.relu(out)
+        out = self.maxpool(out)
+        out = out.view(out.size(0), -1)
+        out = self.fc1(out)
+        out = self.relu(out)
+        out = self.fc2(out)
+        return out
+    
+class rajatNet2(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv_layer_1 = nn.Sequential(
+          nn.Conv2d(3, 64, 3, padding=1),
+          nn.ReLU(),
+          nn.BatchNorm2d(64),
+          nn.MaxPool2d(2))
+        self.conv_layer_2 = nn.Sequential(
+          nn.Conv2d(64, 512, 3, padding=1),
+          nn.ReLU(),
+          nn.BatchNorm2d(512),
+          nn.MaxPool2d(2))
+        self.conv_layer_3 = nn.Sequential(
+          nn.Conv2d(512, 512, kernel_size=3, padding=1),
+          nn.ReLU(),
+          nn.BatchNorm2d(512),
+          nn.MaxPool2d(2)) 
+        self.classifier = nn.Sequential(
+          nn.Flatten(),
+          nn.Linear(in_features=512*3*3, out_features=2))
+    def forward(self, x: torch.Tensor):
+        x = self.conv_layer_1(x)
+        x = self.conv_layer_2(x)
+        x = self.conv_layer_3(x)
+        x = self.conv_layer_3(x)
+        x = self.conv_layer_3(x)
+        x = self.conv_layer_3(x)
+        x = self.classifier(x)
+        return x
+    
+
+def create_rajatNet1(numclasses=2, img_shape=None):
+    model = rajatNet1()
+    return model
+
+def create_rajatNet2(numclasses=2, img_shape=None):
+    model = rajatNet2()
+    return model
+
+
+

@@ -288,11 +288,10 @@ def loadimagefolderdataset(name, path, split=['train', 'val']):
 
 
 def loadtorchvisiondataset(name, path):
+
     datapath = os.path.join(path, name) #data path name is constructed by the input data path and the dataset name
     if not os.path.exists(datapath):
         os.makedirs(datapath)
-    print(f'Dataset path: {datapath}')  
-    print("dfshjbdfshbjdfhjs")
     # choose the training and test datasets
     if name == 'CIFAR10':
         train_data = datasets.CIFAR10(datapath, train=True,
@@ -326,14 +325,20 @@ def loadtorchvisiondataset(name, path):
         N_IMAGES = 25
         imageslist = [image for image, label in [train_data[i] for i in range(N_IMAGES)]] 
         visimagelistingrid(imageslist)
+    else:
+        datapath = '/Users/rajatsharma/Documents/Semester 2/Deep Learning/HW2/cats_and_dogs_filtered'
+        name = 'cats_and_dogs_filtered'
+        
+        data_preprocess = imagenetdatatransforms(training=True, imagesize=IMG_height)
 
-    print(f'Number of training examples: {len(train_data)}')
-    print(f'Number of testing examples: {len(test_data)}')
-    #print(len(test_data))  # 10000
+        train_data = datasets.ImageFolder('/Users/rajatsharma/Documents/Semester 2/Deep Learning/HW2/cats_and_dogs_filtered/train', transform=data_preprocess)
+        test_data = datasets.ImageFolder('/Users/rajatsharma/Documents/Semester 2/Deep Learning/HW2/cats_and_dogs_filtered/validation', transform=data_preprocess)
+
+
     class_names = train_data.classes
     # specify the image classes
-    # classes = ['airplane', 'automobile', 'bird', 'cat', 'deer',
-    #         'dog', 'frog', 'horse', 'ship', 'truck']
+    print(class_names)  # ['cat', 'dog']
+    # classes = [ 'cat','dog']
 
     # obtain training indices that will be used for validation
     num_train = len(train_data)  # 50000
@@ -346,13 +351,13 @@ def loadtorchvisiondataset(name, path):
     train_sampler = SubsetRandomSampler(train_idx)
     valid_sampler = SubsetRandomSampler(valid_idx)
 
-    # prepare data loaders (combine dataset and sampler)
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=BATCH_SIZE,
                                                 sampler=train_sampler, num_workers=num_workers)
     valid_loader = torch.utils.data.DataLoader(train_data, batch_size=BATCH_SIZE,
                                                 sampler=valid_sampler, num_workers=num_workers)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=BATCH_SIZE,
                                                 num_workers=num_workers)
+    
 
     #The second option to do split for the validation data
     # train_data, valid_data = torch.utils.data.random_split(train_data, 
@@ -384,5 +389,10 @@ def loadtorchvisiondataset(name, path):
 
 
 
+dataloaders, dataset_sizes, class_names, imageshape =loadtorchvisiondataset('cats_and_dogs_filtered', '/Users/rajatsharma/Documents/Semester 2/Deep Learning/HW2/cats_and_dogs_filtered')
 
+print(dataloaders)
+print(dataset_sizes)
+print(class_names)
+print(imageshape)
 
