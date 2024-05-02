@@ -222,8 +222,8 @@ def train_model(model, dataloaders, dataset_sizes, criterion, optimizer, schedul
                 if i % 100 == 0:
                     progress.display(i + 1)
                     
-                if profile is not None:
-                    profile.step()
+                # if profile is not None:
+                #     profile.step()
 
             if phase == 'train':
                 scheduler.step()
@@ -271,10 +271,11 @@ def train_model(model, dataloaders, dataset_sizes, criterion, optimizer, schedul
 
     if tensorboard_writer is not None:
         tensorboard_writer.flush()
-    if profile is not None:
-        profile.stop()
+    # if profile is not None:
+    # profile.stop()
 
     # load best model weights
+        
     model.load_state_dict(best_model_wts)
     return model
 

@@ -535,7 +535,7 @@ def create_torchvisionmodel(modulename, numclasses, freezeparameters=True, pretr
     else:
         print('Model name not exist.')
 
-class rajatNet1(nn.Module):
+class rajatNet11(nn.Module):
     def __init__(self):
         super(rajatNet1 , self).__init__()
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
@@ -554,7 +554,7 @@ class rajatNet1(nn.Module):
         out = self.fc2(out)
         return out
     
-class rajatNet2(nn.Module):
+class rajatNet1(nn.Module):
     def __init__(self):
         super().__init__()
         self.conv_layer_1 = nn.Sequential(
