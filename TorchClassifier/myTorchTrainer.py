@@ -412,7 +412,9 @@ def main():
 
     criterion = nn.CrossEntropyLoss()
 
-    model_ft = model_ft.to(device)
+    #model_ft = model_ft.to(device) # required  for custom model
+    #model_ft = model_ft.to(device)
+
     criterion = criterion.to(device)
 
     # Print a summary using torchinfo (uncomment for actual output)

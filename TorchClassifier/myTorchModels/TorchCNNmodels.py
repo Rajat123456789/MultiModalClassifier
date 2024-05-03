@@ -89,8 +89,8 @@ def createTorchCNNmodel(name, numclasses, img_shape, pretrained=True):
         return setupCustomResNet(numclasses, 'resnet50')
     elif name=='rajatNet1':
         return create_rajatNet1(numclasses, img_shape)
-    elif name=='rajatNet2':
-        return create_rajatNet2(numclasses, img_shape)
+    elif name=='rajatNet0':
+        return create_rajatNet0(numclasses, img_shape)
     elif name in model_names:
         #return models.__dict__[name](pretrained=pretrained)
         #return create_torchvisionmodel(name, numclasses, pretrained)
@@ -535,7 +535,7 @@ def create_torchvisionmodel(modulename, numclasses, freezeparameters=True, pretr
     else:
         print('Model name not exist.')
 
-class rajatNet11(nn.Module):
+class rajatNet0(nn.Module):
     def __init__(self):
         super(rajatNet1 , self).__init__()
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
@@ -590,8 +590,8 @@ def create_rajatNet1(numclasses=2, img_shape=None):
     model = rajatNet1()
     return model
 
-def create_rajatNet2(numclasses=2, img_shape=None):
-    model = rajatNet2()
+def create_rajatNet0(numclasses=2, img_shape=None):
+    model = rajatNet0()
     return model
 
 
